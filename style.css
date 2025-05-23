@@ -1,0 +1,107 @@
+/* Reset dan styling dasar */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f8ff;
+  color: #333;
+}
+
+header {
+  background-color: #6900cc;
+  color: white;
+  text-align: center;
+  padding: 2rem 1rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+}
+
+header p {
+  margin-top: 0.5rem;
+  font-size: 1.2rem;
+}
+
+/* Menu tombol */
+.menu {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: #e6f2ff;
+  border-bottom: 1px solid #ccc;
+}
+
+.menu button {
+  background-color: #6900cc;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.menu button:hover {
+  background-color: #6900cc;
+}
+
+/* Konten */
+.konten {
+  padding: 2rem;
+  max-width: 800px;
+  margin: auto;
+  background-color: white;
+  border-radius: 10px;
+  margin-top: 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.konten h2 {
+  color: #6900cc;
+  margin-bottom: 1rem;
+}
+
+.konten h3 {
+  color: #6900cc;
+  margin-top: 1.5rem;
+}
+
+.konten ul {
+  padding-left: 1.5rem;
+}
+
+.konten ul li {
+  margin-bottom: 0.5rem;
+}
+
+/* Kuis */
+#quiz-container {
+  margin-top: 1rem;
+}
+
+#quiz-container button {
+  margin-top: 1rem;
+  background-color: #6900cc;
+  color: white;
+  border: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#quiz-container button:hover {
+  background-color: #6900cc;
+}
+
+/* Responsive iframe */
+iframe {
+  max-width: 100%;
+  border-radius: 8px;
+  border: none;
+  margin-top: 1rem;
+}

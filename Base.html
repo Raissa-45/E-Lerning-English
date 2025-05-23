@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>E-Learning Bahasa Inggris</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>E-Learning Bahasa Inggris</h1>
+    <p>Belajar Bahasa Inggris dengan mudah dan menyenangkan</p>
+  </header>
+
+  <div class="menu">
+    <button onclick="tampilkan('materi')">Materi Belajar</button>
+    <button onclick="tampilkan('video')">Video Pembelajaran</button>
+    <button onclick="tampilkan('kuis')">Kuis & Latihan</button>
+  </div>
+
+  <section id="materi" class="konten">
+    <h2>Materi Belajar</h2>
+
+    <h3>1. Grammar Dasar</h3>
+    <p>Grammar adalah aturan penyusunan kata dan kalimat dalam Bahasa Inggris.</p>
+    <ul>
+      <li><strong>Simple Present:</strong> I eat, You drink, They play</li>
+      <li><strong>Simple Past:</strong> I ate, You drank, They played</li>
+      <li><strong>To be:</strong> am, is, are (present) — was, were (past)</li>
+      <li><strong>Pronouns:</strong> I, you, he, she, it, we, they</li>
+    </ul>
+
+    <h3>2. Vocabulary Harian</h3>
+    <p>Beberapa kosakata yang sering digunakan dalam kehidupan sehari-hari:</p>
+    <ul>
+      <li>Apple - Apel</li>
+      <li>Water - Air</li>
+      <li>School - Sekolah</li>
+      <li>Book - Buku</li>
+      <li>Chair - Kursi</li>
+      <li>Teacher - Guru</li>
+      <li>Sleep - Tidur</li>
+    </ul>
+
+    <h3>3. Listening dan Speaking</h3>
+    <ul>
+      <li>Dengarkan lagu Bahasa Inggris dan pahami liriknya.</li>
+      <li>Tonton film berbahasa Inggris dengan subtitle Bahasa Inggris.</li>
+      <li>Latihan berbicara di depan cermin atau dengan teman.</li>
+      <li>Gunakan aplikasi kamus atau translate untuk membantu pelafalan.</li>
+    </ul>
+
+    <h3>4. Reading dan Writing</h3>
+    <ul>
+      <li>Bacalah cerita anak-anak dalam Bahasa Inggris.</li>
+      <li>Latih menulis kalimat sederhana: “I go to school every day.”</li>
+      <li>Tulis jurnal harian dalam Bahasa Inggris.</li>
+      <li>Baca label produk berbahasa Inggris di sekitar Anda.</li>
+    </ul>
+
+    <h3>5. Tips Belajar Efektif</h3>
+    <ul>
+      <li>Konsisten belajar setiap hari walau hanya 10 menit.</li>
+      <li>Gunakan catatan kecil atau flashcard untuk kosakata baru.</li>
+      <li>Berlatih dengan teman atau grup belajar.</li>
+      <li>Gunakan media digital seperti video, podcast, atau aplikasi belajar.</li>
+    </ul>
+  </section>
+
+  <section id="video" class="konten" style="display: none;">
+    <h2>Video Pembelajaran</h2>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/d0yGdNEWdn0" allowfullscreen></iframe>
+  </section>
+
+<section id="kuis" class="konten" style="display: none;">
+  <h2>Kuis & Latihan</h2>
+  <div id="quiz-container"></div>
+  <p id="score" style="font-weight: bold; margin-top: 1rem;"></p>
+  <button onclick="mulaiKuis()">Ulangi Kuis</button>
+</section>
+
+<script>
+  function tampilkan(id) {
+    document.querySelectorAll('.konten').forEach(sec => sec.style.display = 'none');
+    document.getElementById(id).style.display = 'block';
+    if (id === 'kuis') mulaiKuis(); // otomatis mulai kuis saat dibuka
+  }
+
+  const soalKuis = [
+    {
+      pertanyaan: "Apa bahasa Inggris dari 'apel'?",
+      opsi: ["Banana", "Orange", "Apple", "Grape"],
+      jawabanBenar: "Apple"
+    },
+    {
+      pertanyaan: "Apa bahasa Inggris dari 'air'?",
+      opsi: ["Milk", "Water", "Juice", "Tea"],
+      jawabanBenar: "Water"
+    },
+    {
+      pertanyaan: "Apa bahasa Inggris dari 'sekolah'?",
+      opsi: ["Class", "School", "Teacher", "Lesson"],
+      jawabanBenar: "School"
+    }
+  ];
+
+  let skor = 0;
+  let indeksSoal = 0;
+
+  function tampilkanSoal() {
+    const kontainer = document.getElementById("quiz-container");
+    const soal = soalKuis[indeksSoal];
+
+    let html = `<p><strong>${indeksSoal + 1}. ${soal.pertanyaan}</strong></p>`;
+    soal.opsi.forEach((opsi, index) => {
+      html += `
+        <div>
+          <input type="radio" name="opsi" id="opsi${index}" value="${opsi}" />
+          <label for="opsi${index}">${opsi}</label>
+        </div>
+      `;
+    });
+
+    html += `<button onclick="periksaJawaban()">Kirim Jawaban</button>`;
+    kontainer.innerHTML = html;
+  }
+
+  function periksaJawaban() {
+    const opsiDipilih = document.querySelector('input[name="opsi"]:checked');
+    if (!opsiDipilih) return alert("Pilih salah satu jawaban!");
+
+    const jawaban = opsiDipilih.value;
+    if (jawaban === soalKuis[indeksSoal].jawabanBenar) skor++;
+
+    indeksSoal++;
+    if (indeksSoal < soalKuis.length) {
+      tampilkanSoal();
+    } else {
+      tampilkanHasil();
+    }
+  }
+
+  function tampilkanHasil() {
+    const kontainer = document.getElementById("quiz-container");
+    kontainer.innerHTML = `<p>Anda telah menyelesaikan kuis!</p>`;
+    document.getElementById("score").textContent = `Skor Anda: ${skor} dari ${soalKuis.length}`;
+  }
+
+  function mulaiKuis() {
+    skor = 0;
+    indeksSoal = 0;
+    tampilkanSoal();
+    document.getElementById("score").textContent = "";
+  }
+</script>
+
+</body>
+</html>
